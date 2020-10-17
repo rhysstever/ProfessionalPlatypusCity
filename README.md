@@ -1,4 +1,4 @@
-# ProfessionalPlatypusCity
+# Professional Platypus City
 
 A game jam game where you, as a platypus, meet with professionals around the city to complete quests. 
 
