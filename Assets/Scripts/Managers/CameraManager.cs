@@ -10,8 +10,13 @@ public class CameraManager : MonoBehaviour
 	// Start is called before the first frame update
     void Start()
     {
-		currentCamIndex = 0;
+		// Sets up camera array and adds each camera attached to the player
+		cameras = new Camera[2];
+		cameras[0] = gameObject.GetComponent<GameManager>().player.transform.Find("Camera_FirstPOV").gameObject.GetComponent<Camera>();
+		cameras[1] = gameObject.GetComponent<GameManager>().player.transform.Find("Camera_ThirdPOV").gameObject.GetComponent<Camera>();
 
+		currentCamIndex = 0;
+		
 		for(int i = 0; i < cameras.Length; i++)
 			if(i != currentCamIndex)
 				cameras[i].gameObject.SetActive(false);

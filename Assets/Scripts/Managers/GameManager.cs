@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 		npcs = new Dictionary<string, GameObject>();
 
 		for(int i = 0; i < npcsInScene.Length; i++)
-			npcs.Add(npcsInScene[i].GetComponent<NPC>().name, npcsInScene[i]);
+			npcs.Add(npcsInScene[i].GetComponent<NPC>().npcName, npcsInScene[i]);
     }
 
     // Update is called once per frame
