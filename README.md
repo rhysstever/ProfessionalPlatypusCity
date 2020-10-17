@@ -1,5 +1,9 @@
 # Professional Platypus City
 
-A game jam game where you, as a platypus, meet with professionals around the city to complete quests. 
+A game where the user plays as a platypus and talks with professionals around the city to complete quests. 
 
-![Image of Generated Name](https://github.com/rhysstever/ProfessionalPlatypusCity/blob/main/Assets/Images/generatedName.PNG)
+The randomly generated name:
+![Generated Name Image](https://github.com/rhysstever/ProfessionalPlatypusCity/blob/main/Assets/Images/generatedName.PNG)
+
+The player GameObject
+![Platypus Object Image](https://github.com/rhysstever/ProfessionalPlatypusCity/blob/main/Assets/Images/platypus.PNG)
