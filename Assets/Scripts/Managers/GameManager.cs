@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour
 {
 	public GameObject player;
 	public Dictionary<string, GameObject> npcs;
-	public int npcCount;
 	public GameObject adjacentNPC;
 	
 	// Start is called before the first frame update
@@ -14,14 +13,12 @@ public class GameManager : MonoBehaviour
     {
 		adjacentNPC = null;
 		npcs = new Dictionary<string, GameObject>();
-		npcCount = npcs.Count;
     }
 
     // Update is called once per frame
     void Update()
     {
 		FindNearbyNPC();
-		npcCount = npcs.Count;
 	}
 
 	void FindNearbyNPC()

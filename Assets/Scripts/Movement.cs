@@ -4,64 +4,29 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-	public Vector3 direction;
-	public Vector3 velocity;
-	public Vector3 acceleration;
-	public Quaternion rotation;
-	public float accelerationValue;
-	public float turnValue;
-	public float maxSpeed;
-	float angle;
+	public float moveSpeed;
+	public float turnSpeed;
 
 	// Start is called before the first frame update
 	void Start()
     {
-		direction = new Vector3(0, 0, 1);
-		velocity = new Vector3();
-		acceleration = new Vector3();
-		rotation = transform.rotation;
-    }
+		moveSpeed = 10.0f;
+		turnSpeed = 50.0f;
+	}
 
     // Update is called once per frame
     void FixedUpdate()
 	{
-		Rotate();
-		Move();
+		BasicMovement();
 	}
 
-	void Move()
+	void BasicMovement()
 	{
 		// Foward / Backward movement
-		if(Input.GetKey(KeyCode.W))
-			acceleration += accelerationValue * direction;
-		else if(Input.GetKey(KeyCode.S))
-			acceleration -= accelerationValue * direction;
-		else
-		{
-			velocity *= 0.85f;
-			acceleration = Vector3.zero;
-		}
+		float movement = Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
+		float turning = Input.GetAxis("Horizontal") * Time.deltaTime * turnSpeed;
 
-		velocity += acceleration;
-		velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
-		transform.position += velocity;
-		acceleration = new Vector3();
-	}
-
-	void Rotate()
-	{
-		// Left / Right movement
-		if(Input.GetKey(KeyCode.A))
-		{
-			angle -= 2;
-			direction = Quaternion.Euler(0, -2, 0) * direction;
-		}
-		else if(Input.GetKey(KeyCode.D))
-		{
-			angle += 2;
-			direction = Quaternion.Euler(0, 2, 0) * direction;
-		}
-
-		transform.rotation = Quaternion.Euler(0, angle, 0);
+		transform.Translate(0, 0, movement);
+		transform.Rotate(0, turning, 0);
 	}
 }
