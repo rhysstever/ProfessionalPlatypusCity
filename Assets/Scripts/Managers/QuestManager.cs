@@ -20,9 +20,15 @@ public class QuestManager : MonoBehaviour
 			gameObject.GetComponent<GameManager>().npcs["Tori"],
 			gameObject.GetComponent<GameManager>().npcs["Chase"],
 			100));
+		quests.Add(new Quest(
+			"Crucifiction 2: Electric Boogaloo",
+			gameObject.GetComponent<GameManager>().npcs["Aidan"],
+			gameObject.GetComponent<GameManager>().npcs["Chase"],
+			100));
 
 		// Set current Quest to the first quest in the list
 		currentQuest = quests[0];
+		currentQuest.NextNPC.transform.Find("questMarker").gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -39,6 +45,8 @@ public class QuestManager : MonoBehaviour
 	{
 		if(RightNPC())
 		{
+			// Deactivate the (now) old quest marker
+			currentQuest.NextNPC.transform.Find("questMarker").gameObject.SetActive(false);
 			if(currentQuest.Started)
 			{
 				// The quest is completed
@@ -49,9 +57,11 @@ public class QuestManager : MonoBehaviour
 			else
 			{
 				// The quest is started
-				currentQuest.QuestStated();
-				score += currentQuest.Points / 2;
+				currentQuest.QuestStarted();
 			}
+			// Set the quest marker active in the scene
+			if(currentQuest != null)
+				currentQuest.NextNPC.transform.Find("questMarker").gameObject.SetActive(true);
 		}
 	}
 
@@ -67,11 +77,10 @@ public class QuestManager : MonoBehaviour
 		if(adjNPC == null)
 			return false;
 
-		// The NPC is the correct NPC if they give the quest and the quest hasn't 
-		// yet started OR they return the quest and the quest has not been completed yet
-		if((currentQuest.Started && adjNPC.Equals(currentQuest.EndingNPC))
-			|| (!currentQuest.Started && adjNPC.Equals(currentQuest.StartingNPC)))
-				return true;
+		// The NPC is the correct NPC if they are the 
+		// next NPC the player has to go to
+		if(adjNPC.Equals(currentQuest.NextNPC))
+			return true;
 
 		return false;
 	}
@@ -80,8 +89,11 @@ public class QuestManager : MonoBehaviour
 	{
 		int currentQuestIndex = quests.IndexOf(currentQuest);
 		if(currentQuestIndex != quests.Count - 1)
-			currentQuest = quests[currentQuestIndex++];
+			currentQuest = quests[++currentQuestIndex];
 		else
+		{
+			currentQuest = null;
 			Debug.Log("Game Won");
+		}
 	}
 }

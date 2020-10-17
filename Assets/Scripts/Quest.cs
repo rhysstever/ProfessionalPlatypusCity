@@ -9,6 +9,7 @@ public class Quest
 	private string description;
 	private GameObject startingNPC;
 	private GameObject endingNPC;
+	private GameObject nextNPC;
 	private int points;
 	private bool isStarted;
 	private bool isCompleted;
@@ -16,8 +17,7 @@ public class Quest
 	// Properties
 	public string Name { get { return name; } }
 	public string Description { get { return description; } }
-	public GameObject StartingNPC { get { return startingNPC; } }
-	public GameObject EndingNPC { get { return endingNPC; } }
+	public GameObject NextNPC { get { return nextNPC; } }
 	public int Points { get { return points; } }
 	public bool Started { get { return isStarted; } }
 	public bool Completed { get { return isCompleted; } }
@@ -37,6 +37,7 @@ public class Quest
 		this.description = description;
 		this.startingNPC = startingNPC;
 		this.endingNPC = endingNPC;
+		nextNPC = startingNPC;
 		this.points = points;
 		isStarted = false;
 		isCompleted = false;
@@ -53,6 +54,7 @@ public class Quest
 		this.name = name;
 		this.startingNPC = startingNPC;
 		this.endingNPC = endingNPC;
+		nextNPC = startingNPC;
 		description = "Talk to " + this.endingNPC;
 		this.points = points;
 		isStarted = false;
@@ -60,15 +62,17 @@ public class Quest
 	}
 
 	// Methods
-	public void QuestStated()
+	public void QuestStarted()
 	{
 		isStarted = true;
+		nextNPC = endingNPC;
 		Debug.Log(name + " started!");
 	}
 
 	public void QuestCompleted()
 	{
 		isCompleted = true;
+		nextNPC = null;
 		Debug.Log(name + " completed!");
 	}
 }
