@@ -12,8 +12,8 @@ public class CameraManager : MonoBehaviour
     {
 		// Sets up camera array and adds each camera attached to the player
 		cameras = new Camera[2];
-		cameras[0] = gameObject.GetComponent<GameManager>().player.transform.Find("Camera_FirstPOV").gameObject.GetComponent<Camera>();
-		cameras[1] = gameObject.GetComponent<GameManager>().player.transform.Find("Camera_ThirdPOV").gameObject.GetComponent<Camera>();
+		cameras[0] = gameObject.GetComponent<GameManager>().player.transform.Find("Camera_ThirdPOV").gameObject.GetComponent<Camera>();
+		cameras[1] = gameObject.GetComponent<GameManager>().player.transform.Find("Camera_FirstPOV").gameObject.GetComponent<Camera>();
 
 		currentCamIndex = 0;
 		

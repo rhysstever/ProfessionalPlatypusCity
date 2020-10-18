@@ -66,13 +66,11 @@ public class Quest
 	{
 		isStarted = true;
 		nextNPC = endingNPC;
-		Debug.Log(name + " started!");
 	}
 
 	public void QuestCompleted()
 	{
 		isCompleted = true;
 		nextNPC = null;
-		Debug.Log(name + " completed!");
 	}
 }
