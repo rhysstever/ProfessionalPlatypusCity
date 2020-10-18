@@ -8,7 +8,7 @@ A game where the user plays as a platypus and talks with professionals around th
 2. Upzip .zip folder
 3. Open the .exe
 
-## Asset Images:
+## Image Assets:
 
 The randomly generated name:  
 ![Generated Name Image](https://github.com/rhysstever/ProfessionalPlatypusCity/blob/main/Assets/Images/generatedName.PNG)
