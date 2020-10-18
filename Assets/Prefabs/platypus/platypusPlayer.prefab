@@ -401,6 +401,7 @@ MonoBehaviour:
   moveSpeed: 10
   turnSpeed: 50
   jumpAmount: 0
+  gravity: 0
 --- !u!1 &3521523538511052006
 GameObject:
   m_ObjectHideFlags: 0
