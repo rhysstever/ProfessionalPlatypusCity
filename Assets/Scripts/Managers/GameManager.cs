@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 		FindNearbyNPC(10.0f);
+
+		if(Input.GetKeyDown(KeyCode.Escape))
+			Application.Quit();
 	}
 
 	/// <summary>
@@ -46,7 +49,13 @@ public class GameManager : MonoBehaviour
 					player.transform.position.x,
 					player.GetComponent<BoxCollider>().size.y / 2,
 					player.transform.position.z);
-				npc.Value.transform.LookAt(lookAtPos);
+
+				// Rotate the NPC to look at the player
+				// Except if it is chase on the cross
+				if(npc.Value.transform.position.y > 3.0f)
+					npc.Value.transform.Rotate(0,0,0); // do nothing
+				else
+					npc.Value.transform.LookAt(lookAtPos);
 			}
 		}
 	}

@@ -17,13 +17,15 @@ public class QuestManager : MonoBehaviour
 		quests = new List<Quest>();
 
 		// Add quests
+		CreateRandomQuests(numOfQuests);
+		
+		// Adds Crucificition
 		quests.Add(new Quest(
 			"Crucifiction",
+			"Make the ultimate sacrifice of the GDD Jesus, but get supplies from Tori first",
 			gameObject.GetComponent<GameManager>().npcs["Tori"],
 			gameObject.GetComponent<GameManager>().npcs["Chase"],
 			100));
-
-		CreateRandomQuests(numOfQuests);
 
 		// Set current Quest to the first quest in the list
 		currentQuest = quests[0];
@@ -35,6 +37,10 @@ public class QuestManager : MonoBehaviour
     {
 		if(Input.GetKeyDown(KeyCode.E))
 			TalkToNPC();
+
+		if(currentQuest != null
+			&& currentQuest.Name == "Crucifiction")
+			MoveChase();
 	}
 
 	/// <summary>
@@ -90,7 +96,6 @@ public class QuestManager : MonoBehaviour
 			currentQuest = quests[++currentQuestIndex];
 		else {
 			currentQuest = null;
-			Debug.Log("Game Won");
 		}
 	}
 
@@ -108,12 +113,28 @@ public class QuestManager : MonoBehaviour
 			while(npc2.Equals(npc1)) {
 				npc2 = gameObject.GetComponent<GameManager>().GetRandomNPC();
 			}
+			int questNum = quests.Count + 1;
 			// Creates a new quest and adds it to the list of quests
 			quests.Add(new Quest(
-				"Quest" + i + 1,
+				"Quest " + questNum,
 				npc1,
 				npc2,
 				(int)Random.Range(5, 11) * 10));
 		}
+	}
+
+	void MoveChase()
+	{
+		GameObject chase = gameObject.GetComponent<GameManager>().npcs["Chase"];
+		GameObject cross = GameObject.Find("cross");
+		Vector3 crossPos = new Vector3(
+			cross.transform.position.x + 1.0f, 
+			cross.transform.position.y + 2.0f, 
+			cross.transform.position.z);
+		float crossYRot = 180.0f;
+
+		chase.transform.rotation = new Quaternion();
+		chase.transform.position = crossPos;
+		chase.transform.Rotate(0, crossYRot, 0);
 	}
 }

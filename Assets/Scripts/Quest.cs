@@ -55,7 +55,8 @@ public class Quest
 		this.startingNPC = startingNPC;
 		this.endingNPC = endingNPC;
 		nextNPC = startingNPC;
-		description = "Talk to " + this.endingNPC;
+		description = "Deliver a message from " + this.startingNPC.GetComponent<NPC>().npcName 
+			+ " to " + this.endingNPC.GetComponent<NPC>().npcName;
 		this.points = points;
 		isStarted = false;
 		isCompleted = false;

@@ -22,6 +22,9 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		canvas.transform.LookAt(GameObject.FindWithTag("GameManager").GetComponent<GameManager>().player.transform);
+		canvas.transform.LookAt(
+            GameObject.FindWithTag("GameManager").GetComponent<CameraManager>().cameras[
+                GameObject.FindWithTag("GameManager").GetComponent<CameraManager>().currentCamIndex
+                ].transform.position);
     }
 }
