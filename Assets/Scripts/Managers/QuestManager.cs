@@ -18,14 +18,6 @@ public class QuestManager : MonoBehaviour
 
 		// Add quests
 		CreateRandomQuests(numOfQuests);
-		
-		// Adds Crucificition
-		quests.Add(new Quest(
-			"Crucifiction",
-			"Make the ultimate sacrifice of the GDD Jesus, but get supplies from Tori first",
-			gameObject.GetComponent<GameManager>().npcs["Tori"],
-			gameObject.GetComponent<GameManager>().npcs["Chase"],
-			100));
 
 		// Set current Quest to the first quest in the list
 		currentQuest = quests[0];
@@ -37,10 +29,6 @@ public class QuestManager : MonoBehaviour
     {
 		if(Input.GetKeyDown(KeyCode.E))
 			TalkToNPC();
-
-		if(currentQuest != null
-			&& currentQuest.Name == "Crucifiction")
-			MoveChase();
 	}
 
 	/// <summary>
@@ -55,10 +43,13 @@ public class QuestManager : MonoBehaviour
 				// The quest is completed
 				currentQuest.QuestCompleted();
 				score += currentQuest.Points;
+				gameObject.GetComponent<UIManager>().questStep2.isOn = true;
 				NextQuest();
 			}
-			else
+			else {
 				currentQuest.QuestStarted();
+				gameObject.GetComponent<UIManager>().questStep1.isOn = true;
+			}
 			// Set the quest marker active in the scene
 			if(currentQuest != null)
 				currentQuest.NextNPC.transform.Find("questMarker").gameObject.SetActive(true);
@@ -79,10 +70,7 @@ public class QuestManager : MonoBehaviour
 
 		// The NPC is the correct NPC if they are the 
 		// next NPC the player has to go to
-		if(adjNPC.Equals(currentQuest.NextNPC))
-			return true;
-
-		return false;
+		return adjNPC.Equals(currentQuest.NextNPC);
 	}
 
 	/// <summary>
@@ -92,8 +80,11 @@ public class QuestManager : MonoBehaviour
 	void NextQuest()
 	{
 		int currentQuestIndex = quests.IndexOf(currentQuest);
-		if(currentQuestIndex != quests.Count - 1)
+		if(currentQuestIndex != quests.Count - 1) {
 			currentQuest = quests[++currentQuestIndex];
+			// Clears the toggles on the screen
+			gameObject.GetComponent<UIManager>().ClearToggles();
+		}
 		else {
 			currentQuest = null;
 		}
@@ -109,32 +100,15 @@ public class QuestManager : MonoBehaviour
 			// Finds 2 random NPCs
 			GameObject npc1 = gameObject.GetComponent<GameManager>().GetRandomNPC();
 			GameObject npc2 = gameObject.GetComponent<GameManager>().GetRandomNPC();
+
 			// If the 2 found NPCs are the same, it randomizes the second NPC again
 			while(npc2.Equals(npc1)) {
 				npc2 = gameObject.GetComponent<GameManager>().GetRandomNPC();
 			}
+
 			int questNum = quests.Count + 1;
 			// Creates a new quest and adds it to the list of quests
-			quests.Add(new Quest(
-				"Quest " + questNum,
-				npc1,
-				npc2,
-				(int)Random.Range(5, 11) * 10));
+			quests.Add(new Quest("Quest " + questNum, npc1, npc2, 50));
 		}
-	}
-
-	void MoveChase()
-	{
-		GameObject chase = gameObject.GetComponent<GameManager>().npcs["Chase"];
-		GameObject cross = GameObject.Find("cross");
-		Vector3 crossPos = new Vector3(
-			cross.transform.position.x + 1.0f, 
-			cross.transform.position.y + 2.0f, 
-			cross.transform.position.z);
-		float crossYRot = 180.0f;
-
-		chase.transform.rotation = new Quaternion();
-		chase.transform.position = crossPos;
-		chase.transform.Rotate(0, crossYRot, 0);
 	}
 }

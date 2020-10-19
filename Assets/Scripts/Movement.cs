@@ -19,13 +19,22 @@ public class Movement : MonoBehaviour
 		acceleration = new Vector3();
 	}
 
-    // Update is called once per frame
-    void FixedUpdate()
+	void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.R))
+			Respawn();
+	}
+
+	// Update is called once per frame
+	void FixedUpdate()
 	{
 		BasicMovement();
 		VerticalMovement();
 	}
 
+	/// <summary>
+	/// Handles basic forward/backward & turning movement
+	/// </summary>
 	void BasicMovement()
 	{
 		// Foward / Backward movement
@@ -37,6 +46,9 @@ public class Movement : MonoBehaviour
 		transform.Rotate(0, turning, 0);
 	}
 
+	/// <summary>
+	/// Handles jumping and gravity
+	/// </summary>
 	void VerticalMovement()
 	{
 		if(gameObject.transform.position.y > 0.85f)
@@ -58,5 +70,14 @@ public class Movement : MonoBehaviour
 		}
 
 		transform.Translate(acceleration);
+	}
+
+	/// <summary>
+	/// Resets the player's position and rotation
+	/// </summary>
+	void Respawn()
+	{
+		gameObject.transform.position = new Vector3(-41.0f, 0.85f, -102.0f);
+		gameObject.transform.rotation = Quaternion.identity;
 	}
 }

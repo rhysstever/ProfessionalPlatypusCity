@@ -17,6 +17,8 @@ public class Quest
 	// Properties
 	public string Name { get { return name; } }
 	public string Description { get { return description; } }
+	public GameObject StartingNPC { get { return startingNPC; } }
+	public GameObject EndingNPC { get { return endingNPC; } }
 	public GameObject NextNPC { get { return nextNPC; } }
 	public int Points { get { return points; } }
 	public bool Started { get { return isStarted; } }
