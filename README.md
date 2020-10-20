@@ -15,3 +15,6 @@ The randomly generated name:
 
 The player and base NPC GameObjects:  
 ![Platypus Object Image](https://github.com/rhysstever/ProfessionalPlatypusCity/blob/main/Assets/Images/platypus.PNG)
+
+A scene image:
+![Scene Image](https://github.com/rhysstever/ProfessionalPlatypusCity/blob/main/Assets/Images/sceneImage.PNG)
