@@ -4,9 +4,9 @@ A game where the user plays as a platypus and talks with professionals around th
 
 ## Play It!
 
-1. Download the zip file [here](https://github.com/rhysstever/ProfessionalPlatypusCity/blob/main/PPC_Build_v1.4.zip)
+1. Download the latest .zip file from the [Versions](https://github.com/rhysstever/ProfessionalPlatypusCity/tree/main/Versions) folder
 2. Upzip the .zip folder
-3. Open the .exe
+3. Open the ProfessionalPlatypusCity.exe
 
 ## Image Assets:
 
