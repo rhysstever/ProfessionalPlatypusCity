@@ -33,13 +33,13 @@ public class UIManager : MonoBehaviour
         scoreText.text = "Score: " + gameObject.GetComponent<QuestManager>().score;
 
         // Current Quest
-        if(gameObject.GetComponent<QuestManager>().currentQuest != null) {
+        if(gameObject.GetComponent<GameManager>().currentMenu == MenuState.game) {
             questNameText.text = "Current Quest: " + gameObject.GetComponent<QuestManager>().currentQuest.Name;
             questStep1Text.text = "Talk to " + gameObject.GetComponent<QuestManager>().currentQuest.StartingNPC.GetComponent<NPC>().npcName;
             questStep2Text.text = "Talk to " + gameObject.GetComponent<QuestManager>().currentQuest.EndingNPC.GetComponent<NPC>().npcName;
         }
         // Display gameWon text when all quests are completed
-        else {
+        else if(gameObject.GetComponent<GameManager>().currentMenu == MenuState.gameOver){
             scoreText.gameObject.SetActive(false);
             questNameText.gameObject.SetActive(false);
             questStep1.gameObject.SetActive(false);

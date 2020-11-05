@@ -51,11 +51,11 @@ public class Movement : MonoBehaviour
 	/// </summary>
 	void VerticalMovement()
 	{
-		if(gameObject.transform.position.y > 0.85f)
+		if(!isGrounded())
 		{
 			acceleration.y -= gravity * Time.deltaTime;
 		}
-		else if(gameObject.transform.position.y <= 0.85f)
+		else
 		{
 			gameObject.transform.position = new Vector3(
 				gameObject.transform.position.x,
@@ -70,6 +70,12 @@ public class Movement : MonoBehaviour
 		}
 
 		transform.Translate(acceleration);
+	}
+
+	bool isGrounded()
+	{
+		// Currently, checks if the player is on the same y-value as the ground
+		return gameObject.transform.position.y <= 0.85f;
 	}
 
 	/// <summary>

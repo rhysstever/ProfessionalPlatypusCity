@@ -1,19 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
+
+public enum MenuState
+{
+	main,
+	controls,
+	game,
+	pause,
+	gameOver
+}
 
 public class GameManager : MonoBehaviour
 {
 	public GameObject player;
 	public Dictionary<string, GameObject> npcs;
 	public GameObject adjacentNPC;
+	public MenuState currentMenu;
 	
 	// Start is called before the first frame update
     void Awake()
     {
 		adjacentNPC = null;
 		npcs = new Dictionary<string, GameObject>();
+		ChangeMenuState(MenuState.main);
     }
 
     // Update is called once per frame
@@ -21,8 +33,51 @@ public class GameManager : MonoBehaviour
     {
 		FindNearbyNPC(10.0f);
 
-		if(Input.GetKeyDown(KeyCode.Escape))
-			Application.Quit();
+		switch(currentMenu)
+		{
+			case MenuState.main:
+				break;
+			case MenuState.controls:
+				break;
+			case MenuState.game:
+				// To pause the game
+				if(Input.GetKeyDown(KeyCode.Escape))
+					ChangeMenuState(MenuState.pause);
+				// To gameOver
+				if(gameObject.GetComponent<QuestManager>().currentQuest != null)
+					ChangeMenuState(MenuState.gameOver);
+				break;
+			case MenuState.pause:
+				// Back to game
+				if(Input.GetKeyDown(KeyCode.Escape))
+					ChangeMenuState(MenuState.game);
+				break;
+			case MenuState.gameOver:
+				break;
+		}
+	}
+
+	void ChangeMenuState(MenuState newMenuState)
+	{
+		currentMenu = newMenuState;
+		switch(newMenuState)
+		{
+			case MenuState.main:
+				SceneManager.LoadScene("MainMenu");
+				break;
+			case MenuState.controls:
+				SceneManager.LoadScene("ControlsMenu");
+				break;
+			case MenuState.game:
+				SceneManager.LoadScene("Game");
+				break;
+			case MenuState.pause:
+				SceneManager.LoadScene("PauseMenu");
+				break;
+			case MenuState.gameOver:
+				SceneManager.LoadScene("EndMenu");
+				break;
+		}
 	}
 
 	/// <summary>
