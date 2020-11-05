@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
 	public float turnSpeed;
 	public float jumpAmount;
 	public float gravity;
+	public bool canMove;
 	Vector3 acceleration;
 
 	// Start is called before the first frame update
@@ -19,17 +20,21 @@ public class Movement : MonoBehaviour
 		acceleration = new Vector3();
 	}
 
+	// Update is called once per frame
 	void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.R))
-			Respawn();
+		if(canMove)
+			if(Input.GetKeyDown(KeyCode.R))
+				Respawn();
 	}
 
-	// Update is called once per frame
+	// FixedUpdate is called once every fixed framerate frame
 	void FixedUpdate()
 	{
-		BasicMovement();
-		VerticalMovement();
+		if(canMove) {
+			BasicMovement();
+			VerticalMovement();
+		}
 	}
 
 	/// <summary>

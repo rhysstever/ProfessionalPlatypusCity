@@ -16,7 +16,7 @@ public class NPC : MonoBehaviour
         canvas.transform.Find("Text").gameObject.GetComponent<Text>().text = npcName;
 
 		// Add it to the Dictionary in the GameManager script
-		GameObject.FindWithTag("GameManager").GetComponent<GameManager>().npcs.Add(npcName, gameObject);
+		GameObject.FindWithTag("GameManager").GetComponent<NPCManager>().npcs.Add(npcName, gameObject);
     }
 
     // Update is called once per frame

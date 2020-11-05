@@ -62,7 +62,7 @@ public class QuestManager : MonoBehaviour
 	/// <returns></returns>
 	bool RightNPC()
 	{
-		GameObject adjNPC = gameObject.GetComponent<GameManager>().adjacentNPC;
+		GameObject adjNPC = gameObject.GetComponent<NPCManager>().adjacentNPC;
 
 		// Ensures there is a nearby NPC
 		if(adjNPC == null)
@@ -98,12 +98,12 @@ public class QuestManager : MonoBehaviour
 	{
 		for(int i = 0; i < numOfQuests; i++) {
 			// Finds 2 random NPCs
-			GameObject npc1 = gameObject.GetComponent<GameManager>().GetRandomNPC();
-			GameObject npc2 = gameObject.GetComponent<GameManager>().GetRandomNPC();
+			GameObject npc1 = gameObject.GetComponent<NPCManager>().GetRandomNPC();
+			GameObject npc2 = gameObject.GetComponent<NPCManager>().GetRandomNPC();
 
 			// If the 2 found NPCs are the same, it randomizes the second NPC again
 			while(npc2.Equals(npc1)) {
-				npc2 = gameObject.GetComponent<GameManager>().GetRandomNPC();
+				npc2 = gameObject.GetComponent<NPCManager>().GetRandomNPC();
 			}
 
 			int questNum = quests.Count + 1;
