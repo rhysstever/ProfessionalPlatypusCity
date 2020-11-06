@@ -42,6 +42,14 @@ public class Movement : MonoBehaviour
 	/// </summary>
 	void BasicMovement()
 	{
+		// Sprinting - only allowed on the ground
+		if(isGrounded()) {
+			if(Input.GetKey(KeyCode.LeftShift))
+				moveSpeed = 20.0f;
+			else
+				moveSpeed = 10.0f;
+		}
+
 		// Foward / Backward movement
 		float movement = Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
 		transform.Translate(0, 0, movement);
