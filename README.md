@@ -8,6 +8,11 @@ A game where the user plays as a platypus and talks with professionals around th
 2. Upzip the .zip folder
 3. Open ProfessionalPlatypusCity.exe
 
+## Credits
+- Buildings, roads, trees, and rocks by [Viuletti](https://assetstore.unity.com/publishers/38036)
+- Background music by [bensound.com](https://www.bensound.com/)
+- All other assets (including all platypuses and its rattle) by myself 
+
 ## Image Assets:
 
 The randomly generated name:  
