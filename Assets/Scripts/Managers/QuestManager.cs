@@ -36,11 +36,14 @@ public class QuestManager : MonoBehaviour
 	/// </summary>
 	void TalkToNPC()
 	{
-		if(RightNPC()) {
+		if(IsRightNPC()) {
 			// Deactivate the (now) old quest marker
 			currentQuest.NextNPC.transform.Find("questMarker").gameObject.SetActive(false);
 			if(currentQuest.Started) {
-				// The quest is completed
+				// Quest completed:
+				// - points awarded to the player's score
+				// - toggles checkbox
+				// - plays platypus audio
 				currentQuest.QuestCompleted();
 				score += currentQuest.Points;
 				gameObject.GetComponent<UIManager>().questStep2.isOn = true;
@@ -50,6 +53,9 @@ public class QuestManager : MonoBehaviour
 				currentQuest.QuestStarted();
 				gameObject.GetComponent<UIManager>().questStep1.isOn = true;
 			}
+			
+			gameObject.GetComponent<AudioManager>().Play("Platypus_Noise");
+			
 			// Set the quest marker active in the scene
 			if(currentQuest != null)
 				currentQuest.NextNPC.transform.Find("questMarker").gameObject.SetActive(true);
@@ -60,7 +66,7 @@ public class QuestManager : MonoBehaviour
 	/// Checks if the adjacent NPC is the correct NPC for the current quest
 	/// </summary>
 	/// <returns></returns>
-	bool RightNPC()
+	bool IsRightNPC()
 	{
 		GameObject adjNPC = gameObject.GetComponent<NPCManager>().adjacentNPC;
 

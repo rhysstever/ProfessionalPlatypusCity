@@ -22,7 +22,6 @@ public class UIManager : MonoBehaviour
     {
         ClearToggles();
 
-        // Button onClicks setup
         // Menu Buttons: Play, Controls, and Quit
         mainMenuUIParent.transform.Find("playButton").gameObject.GetComponent<Button>().onClick.AddListener(delegate { 
             gameObject.GetComponent<GameManager>().ChangeMenuState(MenuState.game); });
@@ -33,6 +32,11 @@ public class UIManager : MonoBehaviour
         // Controls Button: Back (to either main menu or pause, wherever the user got to the controls menu from)
         controlsPanel.transform.Find("backButton").gameObject.GetComponent<Button>().onClick.AddListener(ControlsBackButton);
 
+        // Pause Sliders: Music and Game Sounds 
+        pausePanel.transform.Find("musicVolumeSlider").gameObject.GetComponent<Slider>().onValueChanged.AddListener(delegate {
+            gameObject.GetComponent<AudioManager>().ChangeVolumeValue(AudioType.music, pausePanel.transform.Find("musicVolumeSlider").gameObject.GetComponent<Slider>().value); } );
+        pausePanel.transform.Find("gameSoundVolumeSlider").gameObject.GetComponent<Slider>().onValueChanged.AddListener(delegate {
+            gameObject.GetComponent<AudioManager>().ChangeVolumeValue(AudioType.gameSound, pausePanel.transform.Find("gameSoundVolumeSlider").gameObject.GetComponent<Slider>().value); } );
         // Pause Buttons: Resume, Controls, and Main Menu
         pausePanel.transform.Find("resumeButton").gameObject.GetComponent<Button>().onClick.AddListener(delegate { 
             gameObject.GetComponent<GameManager>().ChangeMenuState(MenuState.game); } );
