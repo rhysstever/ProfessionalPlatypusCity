@@ -6,7 +6,7 @@ A game where the user plays as a platypus and talks with professionals around th
 
 1. Download the latest .zip file from the [Versions](https://github.com/rhysstever/ProfessionalPlatypusCity/tree/main/Versions) folder
 2. Upzip the .zip folder
-3. Open the ProfessionalPlatypusCity.exe
+3. Open ProfessionalPlatypusCity.exe
 
 ## Image Assets:
 
